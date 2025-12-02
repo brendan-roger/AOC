@@ -3,6 +3,7 @@ package util
 import (
 	"os"
 	"strings"
+	"sort"
 )
 
 func ReadFile(path string) string {
@@ -23,4 +24,16 @@ func Abs(x int) int {
         return -x
     }
     return x
+}
+
+func LowerBound(a []int64, x int64) int {
+	return sort.Search(len(a), func(i int) bool {
+		return a[i] >= x
+	})
+}
+
+func UpperBound(a []int64, x int64) int {
+	return sort.Search(len(a), func(i int) bool {
+		return a[i] > x
+	})
 }
