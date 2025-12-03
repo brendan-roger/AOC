@@ -1,9 +1,9 @@
 package main
 
 import (
+	"AOC/internal/util"
 	"fmt"
 	"strconv"
-	"AOC/internal/util"
 )
 
 func main() {
@@ -29,7 +29,7 @@ func part1(data []string) int {
 
 		currIndex %= 100
 
-		if(currIndex == 0){
+		if currIndex == 0 {
 			res += 1
 		}
 
@@ -41,24 +41,23 @@ func part2(data []string) int {
 	res := 0
 	currIndex := 50
 
-    for _, line := range data {
-        dir := line[:1]
-        num, _ := strconv.Atoi(line[1:])
+	for _, line := range data {
+		dir := line[:1]
+		num, _ := strconv.Atoi(line[1:])
 
-
-        if dir == "R" {
+		if dir == "R" {
 			val := currIndex + num
-            res += val / 100
-            currIndex = val % 100
+			res += val / 100
+			currIndex = val % 100
 
-        } else {
+		} else {
 
 			dist := (100 - currIndex) % 100
 			res += (dist + num) / 100
 
-			currIndex = ((currIndex - num) % 100 + 100) % 100
-        }
-    }
+			currIndex = ((currIndex-num)%100 + 100) % 100
+		}
+	}
 
 	return res
 }

@@ -1,20 +1,18 @@
 package main
 
 import (
-	f "fmt"
-	str "strings"
-	"sort"
-	"math"
 	"AOC/internal/util"
+	f "fmt"
+	"math"
+	"sort"
+	str "strings"
 )
-
 
 func main() {
 	data := util.ReadFile("2025/02/input.txt")
 	f.Println("Part 1:", part1(data))
 	f.Println("Part 2:", part2(data))
 }
-
 
 func parseRange(data string) ([][]int64, int64) {
 	var ranges [][]int64
@@ -37,7 +35,6 @@ func parseRange(data string) ([][]int64, int64) {
 
 }
 
-
 func getPossibleValues1(max int64) []int64 {
 
 	maxDigits := int(math.Log10(float64(max))) + 1
@@ -53,7 +50,7 @@ func getPossibleValues1(max int64) []int64 {
 		end := inc - 1
 
 		for j := start; j <= end; j++ {
-			val := j * inc + j
+			val := j*inc + j
 
 			if val > max {
 				break
@@ -64,7 +61,6 @@ func getPossibleValues1(max int64) []int64 {
 
 	return res
 }
-
 
 func part1(data string) int64 {
 
@@ -80,64 +76,53 @@ func part1(data string) int64 {
 		prefixMap[i+1] = prefixMap[i] + v
 	}
 
-
-    for _, part := range ranges {
+	for _, part := range ranges {
 		i := util.LowerBound(values, part[0])
 		j := util.UpperBound(values, part[1])
 		res += prefixMap[j] - prefixMap[i]
-    }
+	}
 
-
-    return res
+	return res
 }
 
-
 func getPossibleValues2(max int64) []int64 {
-
 
 	maxDigits := int(math.Log10(float64(max))) + 1
 	set := make(map[int64]struct{})
 
 	var res []int64
 
-
-
 	for i := 1; i <= maxDigits; i++ {
 		inc := int64(math.Pow10(i))
-
-
 
 		start := int64(math.Pow10(i - 1))
 		end := inc - 1
 
 		for t := 2; i*t <= maxDigits; t++ {
 
+			factor := int64(0)
+			for rep := 0; rep < t; rep++ {
+				factor = factor*inc + 1
+			}
 
-            factor := int64(0)
-            for rep := 0; rep < t; rep++ {
-                factor = factor*inc + 1
-            }
+			for p := start; p <= end; p++ {
+				val := p * factor
 
-
-            for p := start; p <= end; p++ {
-                val := p * factor
-
-
-                if val > max {
-                    break
-                }
+				if val > max {
+					break
+				}
 
 				_, found := set[val]
 
 				if found {
-                    continue
-                }
+					continue
+				}
 
 				set[val] = struct{}{}
-                res = append(res, val)
-            }
+				res = append(res, val)
+			}
 
-        }
+		}
 
 	}
 	sort.Slice(res, func(i, j int) bool { return res[i] < res[j] })
@@ -149,9 +134,7 @@ func part2(data string) int64 {
 
 	ranges, max := parseRange(data)
 
-
 	values := getPossibleValues2(max)
-
 
 	var res int64
 
@@ -161,13 +144,11 @@ func part2(data string) int64 {
 		prefixMap[i+1] = prefixMap[i] + v
 	}
 
-
-    for _, part := range ranges {
+	for _, part := range ranges {
 		i := util.LowerBound(values, part[0])
 		j := util.UpperBound(values, part[1])
 		res += prefixMap[j] - prefixMap[i]
-    }
+	}
 
-
-    return res
+	return res
 }

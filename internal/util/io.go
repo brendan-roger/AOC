@@ -2,8 +2,8 @@ package util
 
 import (
 	"os"
-	"strings"
 	"sort"
+	"strings"
 )
 
 func ReadFile(path string) string {
@@ -20,10 +20,10 @@ func ReadLines(path string) []string {
 }
 
 func Abs(x int) int {
-    if x < 0 {
-        return -x
-    }
-    return x
+	if x < 0 {
+		return -x
+	}
+	return x
 }
 
 func LowerBound(a []int64, x int64) int {
