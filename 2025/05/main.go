@@ -204,7 +204,7 @@ func part1(lines []string) int {
 
 	for idx, line := range lines {
 		if line == "" {
-			breakpoint = idx
+			breakpoint = idx + 1
 			break
 		}
 
