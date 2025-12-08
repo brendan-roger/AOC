@@ -38,7 +38,6 @@ type node struct {
 	right    *node
 }
 
-
 func rotateRight(node *node) *node {
 	prev := node.left
 	next := prev.right
@@ -176,7 +175,6 @@ func insertRange(root *node, r Range) *node {
 		r.Max = max(r.Max, next.data.Max)
 	}
 
-
 	return insert(root, r.Min, r)
 }
 
@@ -214,7 +212,6 @@ func part1(lines []string) int {
 
 		root = insertRange(root, Range{Min: min, Max: max})
 	}
-
 
 	var merged []Range
 	inorder(root, &merged)

@@ -6,7 +6,6 @@ import (
 	"strings"
 )
 
-
 func main() {
 	data := util.ReadLines("2025/07/input.txt")
 	fmt.Println("Part 1:", part1(data))
@@ -15,7 +14,7 @@ func main() {
 
 func part1(lines []string) int {
 
-	queue := make(map[int] int)
+	queue := make(map[int]int)
 	res := 0
 
 	for idx, line := range lines {
@@ -25,7 +24,7 @@ func part1(lines []string) int {
 			continue
 		}
 
-		next := make(map[int] int)
+		next := make(map[int]int)
 
 		for key, count := range queue {
 			if line[key] == '^' {
@@ -33,7 +32,7 @@ func part1(lines []string) int {
 				if key > 0 {
 					next[key-1] += count
 				}
-				if key < len(line)-1{
+				if key < len(line)-1 {
 					next[key+1] += count
 				}
 			} else {
@@ -46,12 +45,9 @@ func part1(lines []string) int {
 	return res
 }
 
-
-
-
 func part2(lines []string) int {
 
-	queue := make(map[int] int)
+	queue := make(map[int]int)
 	res := 0
 
 	for idx, line := range lines {
@@ -61,18 +57,18 @@ func part2(lines []string) int {
 			continue
 		}
 
-		next := make(map[int] int)
+		next := make(map[int]int)
 
 		for key, count := range queue {
 
-			if(idx < len(line)) {
+			if idx < len(line) {
 
 				if line[key] == '^' {
 
 					if key > 0 {
 						next[key-1] += count
 					}
-					if key < len(line)-1{
+					if key < len(line)-1 {
 						next[key+1] += count
 					}
 				} else {

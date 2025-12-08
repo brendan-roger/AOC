@@ -7,7 +7,6 @@ import (
 	"strings"
 )
 
-
 func main() {
 	data := util.ReadLines("2025/06/input.txt")
 	fmt.Println("Part 1:", part1(data))
@@ -59,9 +58,8 @@ func part1(lines []string) int {
 	return res
 }
 
-
 type OpIndex struct {
-	index int
+	index    int
 	operator rune
 }
 
@@ -77,7 +75,7 @@ func part2(lines []string) int {
 
 			// operators
 			if lIdx == len(lines)-1 {
-				if r != ' '{
+				if r != ' ' {
 					opMap = append(opMap, OpIndex{cIdx, r})
 				}
 				continue
@@ -93,7 +91,7 @@ func part2(lines []string) int {
 
 			number := int(r - '0')
 
-			if(numberMap[cIdx] == -1) {
+			if numberMap[cIdx] == -1 {
 				numberMap[cIdx] = number
 			} else {
 				numberMap[cIdx] = numberMap[cIdx]*10 + number
@@ -108,20 +106,19 @@ func part2(lines []string) int {
 		operation := op.operator
 		acc := 0
 
-		if(operation == '*') {
+		if operation == '*' {
 			acc += 1
 		}
 
-
 		for index < len(numberMap) && numberMap[index] != -1 {
 
-			if(operation == '*'){
+			if operation == '*' {
 				acc *= numberMap[index]
 			} else {
 				acc += numberMap[index]
 			}
 
-			index +=1
+			index += 1
 		}
 
 		res += acc
